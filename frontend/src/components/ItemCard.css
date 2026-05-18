@@ -1,0 +1,64 @@
+.lista-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.lista-vacia {
+  color: #94A3B8;
+  font-size: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.lista-titulo {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-texto);
+}
+
+.card {
+  background: white;
+  border-radius: var(--radio);
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra);
+  padding: 1.2rem;
+  border-top: 4px solid var(--color-primario);
+  transition: transform 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card[data-categoria="ciudad"] { border-top-color: var(--color-ciudad); }
+.card[data-categoria="montana"] { border-top-color: var(--color-montana); }
+.card[data-categoria="playa"] { border-top-color: var(--color-playa); }
+.card[data-categoria="pueblo"] { border-top-color: var(--color-pueblo); }
+
+.card-nombre {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-detalle {
+  font-size: 0.85rem;
+  color: #64748B;
+  margin-bottom: 0.25rem;
+}
+
+.card-estado {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  background: var(--color-borde);
+  color: var(--color-texto);
+}
+
+.card-estado.completado { background: #DCFCE7; color: #15803D; }
+.card-estado.pendiente  { background: #FEF9C3; color: #A16207; }
+.card-estado.cancelado  { background: #FEE2E2; color: #B91C1C; }

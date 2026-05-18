@@ -1,0 +1,10 @@
+.app-header {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--color-borde);
+  padding-bottom: 1rem;
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  color: var(--color-primario);
+}

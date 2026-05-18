@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-ciudad: #3B82F6;
+  --color-montana: #22C55E;
+  --color-playa: #FACC15;
+  --color-pueblo: #F97316;
+  --color-fondo: #F8FAFC;
+  --color-texto: #1E293B;
+  --color-borde: #E2E8F0;
+  --color-primario: #3B82F6;
+  --radio: 12px;
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}

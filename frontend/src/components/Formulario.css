@@ -1,0 +1,73 @@
+.formulario-container {
+  background: white;
+  border-radius: var(--radio);
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.formulario-container h1 {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  color: var(--color-texto);
+}
+
+.formulario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.campo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: var(--color-primario);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.btn-guardar {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-guardar:hover {
+  opacity: 0.85;
+}
