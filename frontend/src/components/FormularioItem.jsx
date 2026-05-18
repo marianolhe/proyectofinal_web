@@ -1,5 +1,6 @@
 import {categorias} from '../utils/categorias'
 import { useState } from 'react';
+import './Formulario.css';
 
 function Formulario({onAgregarViaje}) {
     const [formulario, setFormulario] = useState({
@@ -37,15 +38,21 @@ function Formulario({onAgregarViaje}) {
     }
 
     return(
-        <div>
+        <div className ='formulario-container'>
             <form onSubmit={enviarFormulario}>
-            <h1>Formulario</h1>
+            <h1>Agregar Viaje</h1>
 
+        <div className='formulario-grid'>
+
+            <div className='campo'>
             <label>Nombre del viaje: </label>
             <input type="text" placeholder="Nombre del viaje"
             value={formulario.nombre}
             onChange={(e) => setFormulario({...formulario, nombre: e.target.value})} />
+            </div>
 
+
+            <div className='campo'>
             <label>Categoria: </label>
             <select
             value={formulario.categoriaId}
@@ -54,7 +61,9 @@ function Formulario({onAgregarViaje}) {
                     <option key={categoria.id} value={categoria.id}>{categoria.nombre} </option>
                 ))}
             </select>
-
+            </div>
+            
+            <div className='campo'>
             <label>Estado del viaje: </label>
             <select
             value={formulario.estado}
@@ -63,27 +72,37 @@ function Formulario({onAgregarViaje}) {
                 <option value="pendiente">Pendiente</option>
                 <option value="cancelado">Cancelado</option>
             </select>
+            </div>
 
+            <div className='campo'>
             <label>Puntuación: </label>
             <input type="number" placeholder="Puntuación del 0-10"
             value={formulario.puntuacion}
             onChange={(e) => setFormulario({...formulario, puntuacion: e.target.value})} />
+            </div>
 
+            <div className='campo'>
             <label> Notas: </label>
             <textarea placeholder="Notas sobre el viaje"
             value={formulario.notas}
             onChange={(e) => setFormulario({...formulario, notas: e.target.value})}></textarea>
+            </div>
 
+            <div className='campo'>
             <label>País: </label>
             <input type="text" placeholder="País del viaje"
             value={formulario.pais}
             onChange={(e) => setFormulario({...formulario, pais: e.target.value})} />
+            </div>
 
+            <div className='campo'>
             <label>Duración: </label>
             <input type="number" placeholder="Duración del viaje"
             value={formulario.duracion}
             onChange={(e) => setFormulario({...formulario, duracion: e.target.value})} />
+            </div>
 
+            <div className='campo'>
             <label> ¿Solo o acompañado?</label>
             <select
             value={formulario.compania}
@@ -91,10 +110,13 @@ function Formulario({onAgregarViaje}) {
                 <option value="solo">Solo</option>
                 <option value="acompañado">Acompañado</option>
             </select>
+            </div>
 
-            <button type="submit">Guardar</button>
+            <button className='btn-guardar' type="submit">Guardar</button>
+
+        </div>
         </form>
-
+    
         </div>
     )
 }
