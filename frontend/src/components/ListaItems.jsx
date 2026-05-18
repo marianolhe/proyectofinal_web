@@ -1,4 +1,4 @@
-
+import CardViaje from "./ItemCard";
 
 function ListaItems({viajes}){
     if (viajes.length === 0){
@@ -8,8 +8,7 @@ function ListaItems({viajes}){
         <div>
             <h1>Lista de viajes</h1>
             {viajes.map((viaje) => (
-                <p key={viaje.id}>
-                    {viaje.nombre}</p>
+                <CardViaje key={viaje.id} viaje={viaje} />  
             ))}
         </div>
 )}
