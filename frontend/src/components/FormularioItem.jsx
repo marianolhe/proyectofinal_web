@@ -1,7 +1,7 @@
 import {categorias} from '../utils/categorias'
 import { useState } from 'react';
 
-function Formulario(){
+function Formulario({onAgregarViaje}) {
     const [formulario, setFormulario] = useState({
         nombre: '',
         categoriaId: '',
@@ -33,7 +33,7 @@ function Formulario(){
             compania: formulario.compania
             }
         }
-        console.log(nuevoViaje);
+        onAgregarViaje(nuevoViaje);
     }
 
     return(
