@@ -27,7 +27,6 @@ function Formulario({onAgregarViaje}) {
             fechaRegistro: new Date().toISOString(),
             fechaActividad : new Date().toISOString(),
             activo: true,
-
             atributos:{
             pais: formulario.pais,
             duracion: formulario.duracion,
@@ -35,6 +34,16 @@ function Formulario({onAgregarViaje}) {
             }
         }
         onAgregarViaje(nuevoViaje);
+        setFormulario({
+            nombre: '',
+            categoriaId: '',
+            estado: '',
+            puntuacion: '',
+            notas: '',
+            pais: '',
+            duracion: '',
+            compania: ''
+        });
     }
 
     return(

@@ -4,9 +4,14 @@ import ListaItems from "./components/ListaItems";
 import './App.css';
 
 function App() {
-  const [viajes, setViajes] = useState(
-    () => JSON.parse(localStorage.getItem('viajes') || '[]')
-  );
+  const [viajes, setViajes] = useState(() => {
+    try{
+      const guardado = localStorage.getItem('viajes');
+      return guardado ? JSON.parse(guardado) : [];
+    } catch {
+      return [];
+    }
+    });
   function agregarViaje(nuevoViaje){
     setViajes([...viajes, nuevoViaje]);
   }
