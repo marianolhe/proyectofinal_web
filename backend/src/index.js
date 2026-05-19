@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import inicializarDB from './db/init.js';
+import router from './routes/items.js';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL ||
         'http://localhost:5173',
 }));
+app.use('/api/items', router);
 
 app.get('/', (req, res) => {
     res.json({ mensaje: 'Backend funcionando' });
