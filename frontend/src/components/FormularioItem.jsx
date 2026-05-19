@@ -6,7 +6,7 @@ function Formulario({onAgregarViaje}) {
     const [formulario, setFormulario] = useState({
         nombre: '',
         categoriaId: '',
-        estado: 'pendiente',
+        estado: '',
         puntuacion: '',
         notas: '',
         pais: '',
@@ -66,6 +66,7 @@ function Formulario({onAgregarViaje}) {
             <select
             value={formulario.categoriaId}
             onChange={(e) => setFormulario({...formulario, categoriaId: e.target.value})}>
+                <option value="">Selecciona una categoría</option>
                 {categorias.map((categoria) => (
                     <option key={categoria.id} value={categoria.id}>{categoria.nombre} </option>
                 ))}
@@ -77,6 +78,7 @@ function Formulario({onAgregarViaje}) {
             <select
             value={formulario.estado}
             onChange={(e) => setFormulario({...formulario, estado: e.target.value})}>
+                <option value="">Selecciona un estado</option>
                 <option value="completado">Completado</option>
                 <option value="pendiente">Pendiente</option>
                 <option value="cancelado">Cancelado</option>
@@ -105,7 +107,7 @@ function Formulario({onAgregarViaje}) {
             </div>
 
             <div className='campo'>
-            <label>Duración: </label>
+            <label>Duración (días): </label>
             <input type="number" placeholder="Duración del viaje"
             value={formulario.duracion}
             onChange={(e) => setFormulario({...formulario, duracion: e.target.value})} />
@@ -116,6 +118,7 @@ function Formulario({onAgregarViaje}) {
             <select
             value={formulario.compania}
             onChange={(e) => setFormulario({...formulario, compania: e.target.value})}>
+                <option value="">Selecciona una opción</option>
                 <option value="solo">Solo</option>
                 <option value="acompañado">Acompañado</option>
             </select>
