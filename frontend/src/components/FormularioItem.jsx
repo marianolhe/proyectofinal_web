@@ -1,8 +1,8 @@
 import {categorias} from '../utils/categorias'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Formulario.css';
 
-function Formulario({onAgregarViaje}) {
+function Formulario({onAgregarViaje, viajeEditando, onActualizarViaje}){ 
     const [formulario, setFormulario] = useState({
         nombre: '',
         categoriaId: '',
@@ -13,6 +13,21 @@ function Formulario({onAgregarViaje}) {
         duracion: '',
         compania: ''
     })
+
+    useEffect(() => {
+    if (viajeEditando) {
+    setFormulario({
+      nombre: viajeEditando.nombre,
+      categoriaId: viajeEditando.categoriaId,
+      estado: viajeEditando.estado,
+      puntuacion: viajeEditando.puntuacion || '',
+      notas: viajeEditando.notas,
+      pais: viajeEditando.atributos.pais,
+      duracion: viajeEditando.atributos.duracion,
+      compania: viajeEditando.atributos.compania
+    })
+    }
+    }, [viajeEditando])
 
     function enviarFormulario(e){
         e.preventDefault();
@@ -33,7 +48,24 @@ function Formulario({onAgregarViaje}) {
             compania: formulario.compania
             }
         }
-        onAgregarViaje(nuevoViaje);
+        if (viajeEditando) {
+        onActualizarViaje({
+        ...viajeEditando,
+        nombre: formulario.nombre,
+        categoriaId: formulario.categoriaId,
+        estado: formulario.estado,
+        puntuacion: formulario.puntuacion ? Number(formulario.puntuacion) : null,
+        notas: formulario.notas,
+        fechaActividad: new Date().toISOString(),
+        atributos: {
+            pais: formulario.pais,
+            duracion: formulario.duracion,
+            compania: formulario.compania
+        }
+    });
+    } else {
+    onAgregarViaje(nuevoViaje);
+    }
         setFormulario({
             nombre: '',
             categoriaId: '',
@@ -44,6 +76,8 @@ function Formulario({onAgregarViaje}) {
             duracion: '',
             compania: ''
         });
+
+        
     }
 
     return(

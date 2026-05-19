@@ -1,6 +1,6 @@
 import './ItemCard.css';
 
-function CardViaje({viaje}){
+function CardViaje({viaje, onEliminarViaje, onEditarViaje}){
     return(
         <div className="card" data-categoria={viaje.categoriaId}>
             <p className='card-nombre'>{viaje.nombre}</p>
@@ -10,6 +10,8 @@ function CardViaje({viaje}){
             <p className='card-detalle'>Pais: {viaje.atributos.pais}</p>
 
             <p className={`card-estado ${viaje.estado}`}> Estado: {viaje.estado}</p>
+            <button onClick={() => onEliminarViaje(viaje.id)}>Eliminar</button>
+            <button onClick={() => onEditarViaje(viaje)}>Editar</button>
         </div>
     )
 }
