@@ -9,7 +9,7 @@ function CardViaje({viaje}){
             <p className='card-detalle'>Puntuacion: {viaje.puntuacion}</p>
             <p className='card-detalle'>Pais: {viaje.atributos.pais}</p>
 
-            <p className='card-estado'>Estado: {viaje.estado}</p>
+            <p className={`card-estado ${viaje.estado}`}> Estado: {viaje.estado}</p>
         </div>
     )
 }

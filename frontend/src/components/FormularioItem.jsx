@@ -6,7 +6,7 @@ function Formulario({onAgregarViaje}) {
     const [formulario, setFormulario] = useState({
         nombre: '',
         categoriaId: '',
-        estado: '',
+        estado: 'pendiente',
         puntuacion: '',
         notas: '',
         pais: '',
