@@ -28,3 +28,5 @@ npm run dev
 | POST | /api/items/:id/registro | Registra actividad diaria |
 
 ## Mis primeros Items
+<img width="1078" height="250" alt="image" src="https://github.com/user-attachments/assets/74d8cedc-520b-4ac6-a5b7-8109c95670f2" />
+
