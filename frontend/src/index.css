@@ -4,17 +4,37 @@
   box-sizing: border-box;
 }
 
+/* Paleta de colores — tema claro
+   Fondo rosado suave, acentos en sage verde y detalles en bronce cálido */
 :root {
-  --color-ciudad: #3B82F6;
-  --color-montana: #22C55E;
-  --color-playa: #FACC15;
-  --color-pueblo: #F97316;
-  --color-fondo: #F8FAFC;
-  --color-texto: #1E293B;
-  --color-borde: #E2E8F0;
-  --color-primario: #3B82F6;
+  /* Colores de categorías — cada tipo de destino tiene su tono */
+  --color-ciudad:   #bb8588; /* dusty-rose */
+  --color-montana:  #a3a380; /* dry-sage */
+  --color-playa:    #d8a48f; /* light-bronze */
+  --color-pueblo:   #c4b97a; /* vanilla-custard oscuro */
+  --color-aventura: #7a8c6a; /* sage oscuro */
+
+  /* Colores de interfaz — tema claro */
+  --color-fondo:              #fdf0f0;  /* rosa muy pálido — derivado de dusty-rose */
+  --color-superficie:         #ffffff;  /* blanco puro para tarjetas y formularios */
+  --color-texto:              #3a2a2a;  /* marrón oscuro cálido — máximo contraste */
+  --color-texto-secundario:   #a3a380;  /* dry-sage — detalles y etiquetas en verde */
+  --color-borde:              #e8d8d8;  /* rosa pálido para bordes suaves */
+  --color-primario:           #a3a380;  /* dry-sage — botones y acentos en verde */
+
   --radio: 12px;
-  --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --sombra: 0 2px 8px rgba(58, 42, 42, 0.08);
+}
+
+/* Paleta de colores — tema oscuro */
+body[data-theme='oscuro'] {
+  --color-fondo:              #2e2424;  /* rosa oscuro profundo */
+  --color-superficie:         #3d2f2f;  /* marrón rojizo oscuro — tarjetas */
+  --color-texto:              #f5e8e8;  /* rosa muy pálido — texto legible */
+  --color-texto-secundario:   #d6ce93;  /* vanilla-custard — detalles secundarios */
+  --color-borde:              #5a3f3f;  /* borde cálido oscuro */
+  --color-primario:           #a3a380;  /* dry-sage — acento verde visible en oscuro */
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 body {
@@ -22,6 +42,7 @@ body {
   background-color: var(--color-fondo);
   color: var(--color-texto);
   min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 #root {
