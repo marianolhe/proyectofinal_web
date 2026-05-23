@@ -1,5 +1,5 @@
 .formulario-container {
-  background: white;
+  background: var(--color-superficie);
   border-radius: var(--radio);
   border: 1px solid var(--color-borde);
   box-shadow: var(--sombra);
@@ -29,7 +29,7 @@
 .campo label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #64748B;
+  color: var(--color-texto-secundario);
 }
 
 .campo input,
