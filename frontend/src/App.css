@@ -1,10 +1,57 @@
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 2rem;
   border-bottom: 2px solid var(--color-borde);
   padding-bottom: 1rem;
 }
 
 .app-header h1 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--color-primario);
+}
+
+/* selector de modo API vs Local */
+.modo-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-texto-secundario);
+}
+
+.btn-modo {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-modo.activo {
+  background: var(--color-primario);
+  color: white;
+  border-color: var(--color-primario);
+}
+
+/* botón de tema claro/oscuro */
+.btn-tema {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-tema:hover {
+  border-color: var(--color-primario);
 }
