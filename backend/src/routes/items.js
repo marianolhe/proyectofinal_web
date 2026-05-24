@@ -6,7 +6,12 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const resultado = await db.query('SELECT * FROM items WHERE activo = 1');
-        res.json(resultado.rows);
+        const items = resultado.rows.map(item => ({
+            ...item,
+            activo: item.activo === 1,
+            atributos: item.atributos ? JSON.parse(item.atributos) : {}
+        }));
+        res.json(items);
     } catch (err) {
         console.error('Error al obtener items:', err);
         res.status(500).json({ error: 'Error al obtener items' });
