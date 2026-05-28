@@ -55,3 +55,89 @@
 .btn-tema:hover {
   border-color: var(--color-primario);
 }
+
+/* filtros combinados */
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.filtro-busqueda {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  min-width: 180px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filtro-busqueda:focus {
+  border-color: var(--color-primario);
+}
+
+.filtro-select {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filtro-select:focus {
+  border-color: var(--color-primario);
+}
+
+.btn-limpiar-filtros {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 20px;
+  background: var(--color-superficie);
+  color: var(--color-texto-secundario);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-limpiar-filtros:hover {
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+/* grid de gráficas */
+.graficas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.grafica-card {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 1.2rem;
+}
+
+.grafica-titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin-bottom: 1rem;
+}
+
+.grafica-vacia {
+  font-size: 0.85rem;
+  color: var(--color-texto-secundario);
+  text-align: center;
+  padding: 2rem 0;
+}
