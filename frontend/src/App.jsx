@@ -1,30 +1,35 @@
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext, useRef, useReducer, useMemo, useCallback } from 'react'
 import Formulario from './components/FormularioItem'
 import ListaItems from './components/ListaItems'
 import { StorageContext } from './context/StorageProvider'
 import { ThemeContext } from './context/ThemeProvider'
+import { itemsReducer, initialState } from './reducers/itemsReducer'
+import { categorias } from './utils/categorias'
+import GraficaActividad from './components/graficas/GraficaActividad'
+import GraficaCategorias from './components/graficas/GraficaCategorias'
+import GraficaPuntuacion from './components/graficas/GraficaPuntuacion'
 import './App.css'
 
 function App() {
   const { modo, setModo, obtenerItems, guardarItem, eliminarItem } = useContext(StorageContext)
   const { tema, toggleTema } = useContext(ThemeContext)
 
-  const [viajes, setViajes] = useState([])
+  const [state, dispatch] = useReducer(itemsReducer, initialState)
+  const { lista, filtroCategoria, filtroEstado, busqueda } = state
+
   const [viajeEditando, setViajeEditando] = useState(null)
 
   // useRef #1 — referencia al input de nombre para auto-focus con Ctrl+N
   const inputNombreRef = useRef(null)
 
-  // useRef #2 — referencia al final de la lista para hacer scroll automático al agregar un viaje
+  // useRef #2 — referencia al final de la lista para scroll automático
   const listaFinalRef = useRef(null)
 
-  // carga los items cada vez que cambia el modo — limpia primero para no mostrar datos del modo anterior
   useEffect(() => {
-    setViajes([])
-    obtenerItems().then(items => setViajes(items))
+    dispatch({ type: 'HIDRATAR', payload: [] })
+    obtenerItems().then(items => dispatch({ type: 'HIDRATAR', payload: items }))
   }, [obtenerItems])
 
-  // atajos de teclado: Ctrl+N enfoca el input, T cambia el tema
   useEffect(() => {
     const manejarAtajo = (e) => {
       if (e.ctrlKey && e.key === 'n') {
@@ -39,38 +44,43 @@ function App() {
     return () => window.removeEventListener('keydown', manejarAtajo)
   }, [toggleTema])
 
-  // agrega un viaje nuevo usando el contexto
+  const listaFiltrada = useMemo(() => {
+    return lista.filter(item =>
+      item.activo &&
+      (filtroCategoria === 'todas' || item.categoriaId === filtroCategoria) &&
+      (filtroEstado === 'todos' || item.estado === filtroEstado) &&
+      item.nombre.toLowerCase().includes(busqueda.toLowerCase())
+    )
+  }, [lista, filtroCategoria, filtroEstado, busqueda])
+
   async function agregarViaje(nuevoViaje) {
-    await guardarItem(nuevoViaje, true)  // true = es nuevo → POST
-    const itemsActualizados = await obtenerItems()
-    setViajes(itemsActualizados)
-    // auto-focus al input después de agregar
+    await guardarItem(nuevoViaje, true)
+    dispatch({ type: 'AGREGAR', payload: nuevoViaje })
     inputNombreRef.current?.focus()
-    // scroll al final de la lista para ver la tarjeta recién agregada
     setTimeout(() => listaFinalRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
   }
 
-  // actualiza un viaje existente usando el contexto
   async function actualizarViaje(viajeActualizado) {
-    await guardarItem(viajeActualizado, false)  // false = existente → PUT
-    const itemsActualizados = await obtenerItems()
-    setViajes(itemsActualizados)
+    await guardarItem(viajeActualizado, false)
+    const items = await obtenerItems()
+    dispatch({ type: 'HIDRATAR', payload: items })
     setViajeEditando(null)
   }
 
-  // archiva un viaje usando el contexto
-  async function archivarViaje(id) {
+  const handleEliminar = useCallback(async (id) => {
     await eliminarItem(id)
-    const itemsActualizados = await obtenerItems()
-    setViajes(itemsActualizados)
-  }
+    dispatch({ type: 'ELIMINAR', payload: id })
+  }, [eliminarItem])
+
+  const handleEditar = useCallback((viaje) => {
+    setViajeEditando(viaje)
+  }, [])
 
   return (
     <div>
       <div className="app-header">
         <h1>Bienvenido a tu tracker de viajes!!</h1>
 
-        {/* selector de modo API vs Local */}
         <div className="modo-selector">
           <span>Modo:</span>
           <button
@@ -87,7 +97,6 @@ function App() {
           </button>
         </div>
 
-        {/* botón para cambiar tema claro/oscuro */}
         <button className="btn-tema" onClick={toggleTema}>
           {tema === 'claro' ? '🌙 Oscuro' : '☀️ Claro'}
         </button>
@@ -100,13 +109,57 @@ function App() {
         inputNombreRef={inputNombreRef}
       />
 
+      <div className="filtros-container">
+        <input
+          type="text"
+          placeholder="🔍 Buscar viaje..."
+          value={busqueda}
+          onChange={e => dispatch({ type: 'FILTRAR', payload: { busqueda: e.target.value } })}
+          className="filtro-busqueda"
+        />
+
+        <select
+          value={filtroCategoria}
+          onChange={e => dispatch({ type: 'FILTRAR', payload: { filtroCategoria: e.target.value } })}
+          className="filtro-select"
+        >
+          <option value="todas">Todas las categorías</option>
+          {categorias.map(c => (
+            <option key={c.id} value={c.id}>{c.emoji} {c.nombre}</option>
+          ))}
+        </select>
+
+        <select
+          value={filtroEstado}
+          onChange={e => dispatch({ type: 'FILTRAR', payload: { filtroEstado: e.target.value } })}
+          className="filtro-select"
+        >
+          <option value="todos">Todos los estados</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="completado">Completado</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+
+        <button
+          className="btn-limpiar-filtros"
+          onClick={() => dispatch({ type: 'LIMPIAR_FILTROS' })}
+        >
+          ✕ Limpiar filtros
+        </button>
+      </div>
+
       <ListaItems
-        viajes={viajes.filter(v => v.activo)}
-        onEliminarViaje={archivarViaje}
-        onEditarViaje={setViajeEditando}
+        viajes={listaFiltrada}
+        onEliminarViaje={handleEliminar}
+        onEditarViaje={handleEditar}
       />
 
-      {/* ancla invisible al final de la lista — useRef #2 hace scroll aquí al agregar un viaje */}
+      <div className="graficas-grid">
+        <GraficaActividad listaFiltrada={listaFiltrada} />
+        <GraficaCategorias listaFiltrada={listaFiltrada} />
+        <GraficaPuntuacion listaFiltrada={listaFiltrada} />
+      </div>
+
       <div ref={listaFinalRef} />
     </div>
   )
