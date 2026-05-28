@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import './ItemCard.css'
 import { categorias } from '../utils/categorias'
 
@@ -30,4 +31,4 @@ function CardViaje({ viaje, onEliminarViaje, onEditarViaje }) {
     )
 }
 
-export default CardViaje
+export default memo(CardViaje)
