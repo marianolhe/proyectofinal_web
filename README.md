@@ -71,7 +71,7 @@ La elegí porque para un tracker de viajes personales tiene mucho sentido saber 
 
 
 
-**DESPUÉS de useMemo** — los commits bajaron a 234. Ahora React se da cuenta cuando la lista filtrada no cambió y simplemente no redibuja las gráficas. `useMemo` guarda el resultado anterior y solo lo vuelve a calcular si cambia algo en `lista`, `filtroCategoria`, `filtroEstado` o `busqueda`.
+**DESPUÉS de useMemo** — los commits bajaron a 234. Ahora React se da cuenta cuando la lista filtrada no cambió y simplemente no redibuja las gráficas. `useMemo` guarda el resultado anterior y solo lo vuelve a calcular si cambia algo en lista, filtroCategoria, filtroEstado o busqueda.
 
 
 
