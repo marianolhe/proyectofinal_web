@@ -1,15 +1,13 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useEffect } from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export const ThemeContext = createContext()
 
 export function ThemeProvider({ children }) {
-    const [tema, setTemaInterno] = useState(
-        () => localStorage.getItem('tema') || 'claro'
-    )
+    const [tema, setTemaInterno] = useLocalStorage('tema', 'claro')
 
     useEffect(() => {
         document.body.setAttribute('data-theme', tema)
-        localStorage.setItem('tema', tema)
     }, [tema])
 
     function setTema(nuevoTema) {
