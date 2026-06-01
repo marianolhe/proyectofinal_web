@@ -1,10 +1,8 @@
-import pg from "pg";
+import pg from 'pg'
 
 const db = new pg.Pool({
-    host: '127.0.0.1',
-    port: 5432,
-    database: 'coleccion_viajes',
-    user: 'marianolhe',
-});
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+})
 
-export default db;
+export default db
