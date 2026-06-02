@@ -3,20 +3,71 @@
 App full-stack para registrar y gestionar viajes personales.
 Construida con React + Vite en el frontend y Express + PostgreSQL en el backend.
 
+🌐 **Demo:** https://proyectofinal-web-lid4.vercel.app
+⚙️ **API:** https://coleccion-viajes-api.onrender.com
+
 ## Tema
 Viajes y destinos visitados o pendientes.
 
-## Cómo correr el proyecto
+## Screenshots
+
+### Tema claro
+
+
+### Tema oscuro
+
+
+### Gráficas
+
+
+## Stack tecnológico
+
+| Tecnología | Versión | Uso |
+|------------|---------|-----|
+| React | 19.2.6 | UI y manejo de estado |
+| Vite | 8.0.12 | Bundler y dev server |
+| Recharts | 2.13.3 | Gráficas |
+| Express | 5.2.1 | Servidor backend |
+| PostgreSQL | — | Base de datos |
+| pg | 8.21.0 | Conexión a PostgreSQL |
+| Render | — | Deploy backend + DB |
+| Vercel | — | Deploy frontend |
+
+## Cómo correr localmente
+
+### Requisitos
+- Node.js 18+
+- PostgreSQL corriendo localmente
 
 ### Frontend
+```bash
 cd frontend
-npm install
+npm install --legacy-peer-deps
 npm run dev
+```
 
 ### Backend
+```bash
 cd backend
 npm install
 npm run dev
+```
+
+El backend necesita un archivo `.env` en la carpeta `backend/` con:
+```
+DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/coleccion_viajes
+FRONTEND_URL=http://localhost:5173
+PORT=3000
+```
+
+## Hooks usados
+
+| Hook | Archivo | Qué hace |
+|------|---------|----------|
+| `useLocalStorage` | `src/hooks/useLocalStorage.js` | Sincroniza estado con localStorage automáticamente |
+| `useFetch` | `src/hooks/useFetch.js` | Fetch con data/loading/error y AbortController |
+| `useAtajoTeclado` | `src/hooks/useAtajoTeclado.js` | Registra atajos de teclado con cleanup automático |
+| `useRacha` | `src/hooks/useRacha.js` | Calcula días consecutivos con actividad registrada |
 
 ## Endpoints disponibles
 | Método | Ruta | Descripción |
@@ -74,6 +125,12 @@ La elegí porque para un tracker de viajes personales tiene mucho sentido saber 
 **DESPUÉS de useMemo** — los commits bajaron a 234. Ahora React se da cuenta cuando la lista filtrada no cambió y simplemente no redibuja las gráficas. `useMemo` guarda el resultado anterior y solo lo vuelve a calcular si cambia algo en `lista`, `filtroCategoria`, `filtroEstado` o `busqueda`.
 
 
+
+## Sobre mí
+
+**Marian Olivares** — Carnet 241016 — 5to semestre
+
+Este proyecto me hizo entender de verdad cómo funciona el estado en React. Antes usaba useState para todo sin pensar mucho; ahora sé cuándo tiene más sentido usar useReducer, cuándo memoizar y cómo separar lógica en hooks propios. Lo que más me gustó fue ver en el Profiler cómo useMemo redujo los re-renders de 378 a 234 con un cambio pequeño.
 
 ## Mis primeros Items
 <img width="1078" height="250" alt="image" src="https://github.com/user-attachments/assets/74d8cedc-520b-4ac6-a5b7-8109c95670f2" />
