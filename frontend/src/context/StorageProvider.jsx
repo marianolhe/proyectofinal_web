@@ -1,15 +1,12 @@
-import { createContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useCallback } from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export const StorageContext = createContext()
 
-export function StorageProvider({ children }) {
-    const [modo, setModoInterno] = useState(
-        () => localStorage.getItem('modo') || 'local'
-    )
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
-    useEffect(() => {
-        localStorage.setItem('modo', modo)
-    }, [modo])
+export function StorageProvider({ children }) {
+    const [modo, setModoInterno] = useLocalStorage('modo', 'local')
 
     function setModo(nuevoModo) {
         setModoInterno(nuevoModo)
@@ -18,7 +15,7 @@ export function StorageProvider({ children }) {
     const obtenerItems = useCallback(async () => {
         if (modo === 'api') {
             try {
-                const respuesta = await fetch('http://localhost:3000/api/items')
+                const respuesta = await fetch(`${API_URL}/api/items`)
                 return await respuesta.json()
             } catch {
                 console.error('Error al conectar con la API')
@@ -35,8 +32,8 @@ export function StorageProvider({ children }) {
             try {
                 const metodo = esNuevo ? 'POST' : 'PUT'
                 const url = esNuevo
-                    ? 'http://localhost:3000/api/items'
-                    : `http://localhost:3000/api/items/${item.id}`
+                    ? `${API_URL}/api/items`
+                    : `${API_URL}/api/items/${item.id}`
                 await fetch(url, {
                     method: metodo,
                     headers: { 'Content-Type': 'application/json' },
@@ -61,9 +58,7 @@ export function StorageProvider({ children }) {
     const eliminarItem = useCallback(async (id) => {
         if (modo === 'api') {
             try {
-                await fetch(`http://localhost:3000/api/items/${id}`, {
-                    method: 'DELETE'
-                })
+                await fetch(`${API_URL}/api/items/${id}`, { method: 'DELETE' })
             } catch {
                 console.error('Error al eliminar en la API')
             }

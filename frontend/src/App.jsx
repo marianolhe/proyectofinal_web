@@ -8,7 +8,12 @@ import { categorias } from './utils/categorias'
 import GraficaActividad from './components/graficas/GraficaActividad'
 import GraficaCategorias from './components/graficas/GraficaCategorias'
 import GraficaPuntuacion from './components/graficas/GraficaPuntuacion'
+import useAtajoTeclado from './hooks/useAtajoTeclado'
+import useRacha from './hooks/useRacha'
+import useFetch from './hooks/useFetch'
 import './App.css'
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 function App() {
   const { modo, setModo, obtenerItems, guardarItem, eliminarItem } = useContext(StorageContext)
@@ -25,24 +30,18 @@ function App() {
   // useRef #2 — referencia al final de la lista para scroll automático
   const listaFinalRef = useRef(null)
 
+  const { racha } = useRacha(lista)
+  const { data: estadoApi } = useFetch(modo === 'api' ? `${API_URL}/` : null)
+
   useEffect(() => {
     dispatch({ type: 'HIDRATAR', payload: [] })
     obtenerItems().then(items => dispatch({ type: 'HIDRATAR', payload: items }))
   }, [obtenerItems])
 
-  useEffect(() => {
-    const manejarAtajo = (e) => {
-      if (e.ctrlKey && e.key === 'n') {
-        e.preventDefault()
-        inputNombreRef.current?.focus()
-      }
-      if (e.key === 't' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-        toggleTema()
-      }
-    }
-    window.addEventListener('keydown', manejarAtajo)
-    return () => window.removeEventListener('keydown', manejarAtajo)
-  }, [toggleTema])
+  useAtajoTeclado({
+    'ctrl+n': () => inputNombreRef.current?.focus(),
+    't': () => toggleTema()
+  })
 
   const listaFiltrada = useMemo(() => {
     return lista.filter(item =>
@@ -79,7 +78,11 @@ function App() {
   return (
     <div>
       <div className="app-header">
-        <h1>Bienvenido a tu tracker de viajes!!</h1>
+        <div className="header-titulo">
+          <h1>Bienvenido a tu tracker de viajes!!</h1>
+          {racha > 0 && <span className="racha-badge">🔥 {racha} {racha === 1 ? 'día' : 'días'} de racha</span>}
+          {modo === 'api' && estadoApi && <span className="api-badge">🟢 API conectada</span>}
+        </div>
 
         <div className="modo-selector">
           <span>Modo:</span>
