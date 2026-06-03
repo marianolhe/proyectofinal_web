@@ -12,12 +12,15 @@ Viajes y destinos visitados o pendientes.
 ## Screenshots
 
 ### Tema claro
+<img width="1204" height="761" alt="image" src="https://github.com/user-attachments/assets/0f04c0d6-502b-415b-9d20-867b7ff9b9a4" />
 
 
 ### Tema oscuro
+<img width="1421" height="788" alt="image" src="https://github.com/user-attachments/assets/0dde8a70-29bf-4be1-be7d-f500b1c6413d" />
 
 
 ### Gráficas
+<img width="1089" height="339" alt="image" src="https://github.com/user-attachments/assets/e81feb1b-11dc-473a-a4fb-199a7cfe3a1c" />
 
 
 ## Stack tecnológico
@@ -128,7 +131,7 @@ La elegí porque para un tracker de viajes personales tiene mucho sentido saber 
 
 ## Sobre mí
 
-**Marian Olivares** — Carnet 241016 — 5to semestre
+**Marian Olivares** 
 
 Este proyecto me hizo entender de verdad cómo funciona el estado en React. Antes usaba useState para todo sin pensar mucho; ahora sé cuándo tiene más sentido usar useReducer, cuándo memoizar y cómo separar lógica en hooks propios. Lo que más me gustó fue ver en el Profiler cómo useMemo redujo los re-renders de 378 a 234 con un cambio pequeño.
 
