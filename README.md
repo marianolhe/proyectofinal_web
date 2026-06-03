@@ -122,10 +122,12 @@ La elegí porque para un tracker de viajes personales tiene mucho sentido saber 
 ## Análisis de optimización con React Profiler
 
 **ANTES de useMemo** — mientras escribía en el buscador la app hizo 378 commits. O sea, cada letra que escribía hacía que React recalculara todo y redibujara las 3 gráficas aunque no hubiera cambiado nada relevante.
+<img width="1600" height="1023" alt="image" src="https://github.com/user-attachments/assets/0ff7107f-096f-4d54-b4f6-842ba3a445ba" />
 
 
 
 **DESPUÉS de useMemo** — los commits bajaron a 234. Ahora React se da cuenta cuando la lista filtrada no cambió y simplemente no redibuja las gráficas. `useMemo` guarda el resultado anterior y solo lo vuelve a calcular si cambia algo en `lista`, `filtroCategoria`, `filtroEstado` o `busqueda`.
+<img width="2446" height="1298" alt="image" src="https://github.com/user-attachments/assets/21db8d64-051e-4624-b30a-a10fdedde0df" />
 
 
 
