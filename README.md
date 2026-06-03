@@ -5,6 +5,7 @@ Construida con React + Vite en el frontend y Express + PostgreSQL en el backend.
 
 🌐 **Demo:** https://proyectofinal-web-lid4.vercel.app
 ⚙️ **API:** https://coleccion-viajes-api.onrender.com
+💕 **Link video:** https://drive.google.com/file/d/1iJgGZEvejTBG05qYY8PlU3VTZC5wxDUi/view?usp=sharing 
 
 ## Tema
 Viajes y destinos visitados o pendientes.
